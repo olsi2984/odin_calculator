@@ -10,7 +10,15 @@ let buttons = document.querySelectorAll('#num');
 
 for(let button of buttons) {
     button.addEventListener("click", function() { 
-    
+        if (this.innerText === "." && numStr [numStr.length-1]=== ".") {
+            return;
+        }
+        if (this.innerText === "0" && inArr [inArr.length-1]=== "/") {
+            return;        
+        }
+        if (this.innerText !== "." && numStr [numStr.length-1]=== "0") {
+            return;        
+        }
         let buttonText = this.innerText; 
         numStr = numStr + buttonText;
         display();          
@@ -23,13 +31,18 @@ let operators = document.querySelectorAll('#operator');
 
 for(let operator of operators) {
     operator.addEventListener("click", function() { 
-
+        
+        if (numStr === "") {
+            if (this.innerText === "-" || this.innerText === "+" || this.innerText === "*" || this.innerText === "/") {
+                return;
+            }
+        }
+        
         inArr.push(numStr);    
         numStr = this.innerText;         
         display();
         inArr.push(numStr);
-        numStr = "";
-        
+        numStr = "";        
        });
 }
 
@@ -42,27 +55,25 @@ equals.addEventListener("click", function(){
     });
 
 function operate() {
-    for (let i = 0; i < inArr.length; i++) {
-        let a = parseFloat(inArr[i]);
-        if (typeof a === "number") {
-            resultArr[i] = a;
-        } else {
-            if (inArr[i]==="*") {
-                resultArr[i] = inArr[i-1] * inArr[i+1];
-            } else {
-                if (inArr[i]==="/") {
-                    resultArr[i] = inArr[i-1] / inArr[i+1];    
-                } else {
-                    if (inArr[i]==="-") {
-                      resultArr[i] = -1 * inArr[i+1];  
-                    } else {
-                        inArr[i] = 0 ;
-                    }
-                }
-            }
-        }
-        
-    }
+    let newStr = inArr.join("");
+    let newArr = newStr.split(/[+-]/);
+    console.log(newStr);
+    console.log(inArr);
+    console.log(newArr);
+    
+}
+
+let clear = document.querySelector('#clear');
+clear.addEventListener("click", function(){ 
+    clean();
+    display(); 
+    
+    });
+
+function clean() {
+    inArr = [];
+    resultArr = [0];   
+    numStr = "";
 }
 
 
