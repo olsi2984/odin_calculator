@@ -12,6 +12,10 @@
     
 }
 
+#history{
+    font-size: medium;    
+}
+
 #calculator {
     width: 300px;
     height: 500px;
@@ -45,14 +49,12 @@ button {
     background-color: teal;
 }
 
-#clear {
-    background-color: blueviolet;
-}
 #equals {
     background-color: red;
 }
 
-#clear {
-    width: 98%;
-       
+.deleter {
+    width: 45%;
+    border-radius: 35px;  
+    background-color: blueviolet; 
 }
